@@ -1,75 +1,308 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="description" content="Portfolio of Lovely Martinez, an IT student showcasing web development, design, and technical projects." />
-  <meta name="theme-color" content="#10192b" />
-  <title>Lovely Martinez | Portfolio</title>
+  <meta name="theme-color" content="#08171c" />
+  <meta name="description" content="Lovely Martinez — an IT student who enjoys building helpful web projects, thoughtful designs, and digital experiences." />
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Lovely Martinez | Portfolio" />
+  <meta property="og:description" content="Web projects, creative design, and an ever-growing journey in technology." />
+  <title>Lovely Martinez — Portfolio</title>
   <style>
-    :root{color-scheme:dark;--bg:#0b1220;--panel:#121e32;--panel2:#192740;--ink:#eff4ff;--muted:#a7b6ce;--line:#2c3b53;--accent:#79e4c7;--accent2:#98b5ff;--radius:20px}
-    *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:radial-gradient(circle at 85% 8%,#172e49 0%,transparent 33%),var(--bg);font-family:Inter,system-ui,-apple-system,Segoe UI,Arial,sans-serif;color:var(--ink);line-height:1.6}a{color:inherit;text-decoration:none}a:focus-visible,button:focus-visible{outline:3px solid var(--accent);outline-offset:4px}
-    .container{width:min(1100px,calc(100% - 40px));margin-inline:auto}header{position:sticky;top:0;z-index:10;background:#0b1220e8;backdrop-filter:blur(16px);border-bottom:1px solid var(--line)}.nav{min-height:75px;display:flex;align-items:center;justify-content:space-between;gap:25px}.logo{font-size:1.05rem;font-weight:800;letter-spacing:.01em}.logo span{color:var(--accent)}.links{display:flex;gap:24px;align-items:center;flex-wrap:wrap}.links a{font-size:.9rem;color:var(--muted)}.links a:hover,.inline-link:hover{color:var(--accent)}
-    .hero{padding:115px 0 95px;display:grid;grid-template-columns:1.6fr 1fr;align-items:center;gap:50px}.eyebrow{color:var(--accent);font-size:.82rem;text-transform:uppercase;letter-spacing:.18em;font-weight:800}.hero h1{font-size:clamp(2.6rem,7vw,5.4rem);line-height:1.06;letter-spacing:-.06em;margin:16px 0 22px}.hero h1 span{background:linear-gradient(100deg,var(--accent),var(--accent2));color:transparent;background-clip:text}.hero p{max-width:580px;color:var(--muted);font-size:1.07rem}.buttons{display:flex;flex-wrap:wrap;gap:12px;margin-top:27px}.btn{display:inline-flex;justify-content:center;align-items:center;padding:12px 20px;border-radius:12px;font-weight:700;font-size:.92rem;border:1px solid var(--line)}.btn.primary{background:var(--accent);border-color:var(--accent);color:#08231d}.btn.secondary{background:transparent}.btn:hover{transform:translateY(-2px);transition:transform .15s}
-    .profile{aspect-ratio:1;min-height:230px;max-width:330px;width:100%;justify-self:center;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;border:1px solid #395b70;background:linear-gradient(145deg,#1c354a,#19263e 60%,#123a37);border-radius:35px;box-shadow:0 24px 80px #0005;transform:rotate(2deg)}.profile .monogram{font-size:clamp(4rem,10vw,6rem);font-weight:900;letter-spacing:-.09em;color:var(--accent)}.profile small{color:var(--muted);font-size:.83rem;letter-spacing:.13em;text-transform:uppercase}
-    section{padding:70px 0}section h2{font-size:clamp(1.8rem,4vw,2.7rem);line-height:1.2;letter-spacing:-.035em;margin:10px 0 16px}section .lead{max-width:700px;color:var(--muted);margin-top:0}.kicker{display:inline-block;color:var(--accent);font-weight:800;font-size:.79rem;text-transform:uppercase;letter-spacing:.18em}
-    .about{border-top:1px solid var(--line)}.about-grid{display:grid;grid-template-columns:1.5fr 1fr;gap:24px;align-items:start}.card{background:linear-gradient(145deg,#16233a,#111d30);border:1px solid var(--line);border-radius:var(--radius);padding:27px}.card p{color:var(--muted)}.facts{display:grid;gap:14px}.fact strong{display:block;font-size:.83rem;color:var(--accent);text-transform:uppercase;letter-spacing:.07em}.fact span{color:var(--ink)}
-    .skills{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:26px}.skills h3,.project h3{margin:0 0 10px;font-size:1.12rem}.skills p{font-size:.93rem;margin:0}.projects{display:grid;grid-template-columns:repeat(2,1fr);gap:18px;margin-top:28px}.project{min-height:220px;display:flex;flex-direction:column;justify-content:space-between}.project .tag{font-size:.76rem;letter-spacing:.07em;text-transform:uppercase;color:var(--accent);font-weight:800}.project p{margin-bottom:0}.project .badge{display:inline-flex;align-self:flex-start;margin-top:22px;background:#25403d;color:#aafbe5;border-radius:99px;font-size:.75rem;font-weight:700;padding:5px 11px}
-    .contact-panel{display:flex;align-items:center;justify-content:space-between;gap:25px;background:linear-gradient(120deg,#193f3c,#182843);border:1px solid #3a716c;border-radius:var(--radius);padding:35px}.contact-panel h2{margin:0 0 10px}.contact-panel p{color:var(--muted);max-width:580px;margin:0}.foot{display:flex;justify-content:space-between;align-items:center;gap:15px;flex-wrap:wrap;border-top:1px solid var(--line);padding:26px 0 35px;color:var(--muted);font-size:.85rem}.inline-link{color:var(--accent2)}
-    @media(max-width:760px){.nav{flex-direction:column;justify-content:center;padding:15px 0;gap:10px}.links{gap:14px;justify-content:center}.hero{grid-template-columns:1fr;padding:75px 0 65px;gap:35px}.profile{max-width:240px;min-height:240px;justify-self:start}.about-grid{grid-template-columns:1fr}.skills,.projects{grid-template-columns:1fr}.contact-panel{flex-direction:column;align-items:flex-start}section{padding:53px 0}}
-    @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.btn:hover{transform:none}}
+    :root {
+      color-scheme: dark;
+      --bg: #08171c;
+      --bg2: #0c2227;
+      --panel: #112b30;
+      --panel2: #12343a;
+      --line: rgba(204,239,224,.16);
+      --white: #f5f7ee;
+      --muted: #b3c6c1;
+      --accent: #c9f77a;
+      --pink: #edac9e;
+      --container: 1120px;
+      --radius: 24px;
+    }
+    * {box-sizing:border-box}
+    html {scroll-behavior:smooth;scroll-padding-top:95px}
+    body {margin:0;background:var(--bg);color:var(--white);font-family:Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;line-height:1.65;overflow-x:hidden}
+    a {color:inherit;text-decoration:none}
+    a:focus-visible,button:focus-visible {outline:3px solid var(--accent);outline-offset:4px}
+    button {font:inherit}
+    ::selection {background:var(--accent);color:var(--bg)}
+    .wrap {width:min(var(--container),calc(100% - 42px));margin:auto}
+    .site-header {height:78px;position:sticky;top:0;z-index:30;background:rgba(8,23,28,.88);backdrop-filter:blur(18px);border-bottom:1px solid var(--line)}
+    .nav {height:100%;display:flex;align-items:center;justify-content:space-between;gap:20px}
+    .brand {font-size:1.15rem;letter-spacing:-.055em;font-weight:850;white-space:nowrap}
+    .brand span {color:var(--accent)}
+    .nav-links {display:flex;align-items:center;gap:34px}
+    .nav-links a {font-size:.88rem;color:var(--muted);font-weight:600;transition:color .2s}
+    .nav-links a:hover {color:var(--accent)}
+    .nav-cta {display:inline-flex;gap:9px;align-items:center;padding:10px 18px;border:1px solid rgba(201,247,122,.6);border-radius:50px;font-size:.85rem;font-weight:800;color:var(--accent);transition:background .2s}
+    .nav-cta:hover {background:rgba(201,247,122,.1)}
+    .menu-toggle {display:none;background:none;border:1px solid var(--line);color:var(--white);border-radius:12px;min-width:44px;min-height:44px;cursor:pointer;font-size:1.25rem}
+    .hero-shell {position:relative;overflow:hidden;border-bottom:1px solid var(--line)}
+    .hero-shell::before {content:"";position:absolute;inset:-30% -20% auto auto;width:850px;height:850px;background:radial-gradient(circle,rgba(72,144,128,.19),transparent 63%);pointer-events:none}
+    .hero-shell::after {content:"";position:absolute;bottom:-400px;left:-250px;width:700px;height:700px;background:radial-gradient(circle,rgba(201,247,122,.055),transparent 62%);pointer-events:none}
+    .hero {min-height:650px;padding:93px 0 95px;display:grid;grid-template-columns:1.13fr .87fr;gap:60px;align-items:center;position:relative;z-index:1}
+    .eyebrow {display:inline-flex;align-items:center;gap:11px;color:var(--accent);font-size:.76rem;font-weight:850;letter-spacing:.15em;text-transform:uppercase}
+    .eyebrow::before {content:"";height:9px;width:9px;border-radius:50%;background:var(--accent);box-shadow:0 0 0 6px rgba(201,247,122,.1)}
+    h1,h2,h3,p {margin-top:0}
+    h1 {font-size:clamp(3.25rem,6.7vw,6.35rem);font-weight:800;line-height:1.05;letter-spacing:-.083em;margin:28px 0 24px}
+    h1 em {font-style:normal;color:var(--accent)}
+    .hero-summary {font-size:1.09rem;color:var(--muted);max-width:560px;line-height:1.82}
+    .hero-actions {display:flex;flex-wrap:wrap;gap:12px;margin-top:33px}
+    .button {display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:49px;padding:12px 21px;border-radius:12px;font-weight:800;font-size:.9rem;border:1px solid var(--line);transition:transform .2s,background .2s;cursor:pointer}
+    .button:hover {transform:translateY(-3px)}
+    .button.primary {background:var(--accent);color:#17210a;border-color:var(--accent)}
+    .button.ghost {background:rgba(255,255,255,.035);color:var(--white)}
+    .hero-foot {margin-top:55px;display:flex;gap:12px;align-items:center;color:var(--muted);font-size:.8rem}
+    .line {height:1px;width:38px;background:var(--accent)}
+    .visual {width:100%;max-width:460px;aspect-ratio:0.95;margin-left:auto;position:relative}
+    .visual-board {position:absolute;inset:12% 7% 12% 7%;border:1px solid #4b7366;border-radius:160px 160px 28px 28px;background:radial-gradient(circle at 60% 35%,#326354 0%,#19453d 38%,#0c2e30 72%);box-shadow:inset 0 0 80px rgba(0,0,0,.25),0 30px 70px rgba(0,0,0,.23);display:grid;place-content:center;text-align:center;overflow:hidden}
+    .visual-board::after {content:"";position:absolute;inset:20px;border:1px solid rgba(255,255,255,.16);border-radius:145px 145px 16px 16px;pointer-events:none}
+    .big-initials {font-size:clamp(6rem,13vw,11rem);font-weight:850;line-height:1;letter-spacing:-.13em;padding-right:18px;color:var(--accent);text-shadow:0 18px 40px rgba(0,0,0,.25)}
+    .visual-board p {font-size:.72rem;letter-spacing:.27em;color:#d4dfd5;margin:26px 0 0;font-weight:700}
+    .orbit-text {position:absolute;top:1%;left:2%;z-index:2;display:flex;align-items:center;gap:8px;font-weight:800;font-size:.78rem;color:#e6f6d6;transform:rotate(-10deg)}
+    .orbit-text span {background:var(--accent);width:7px;height:7px;border-radius:50%}
+    .chip {position:absolute;z-index:2;background:#e9eee0;color:#18322d;box-shadow:0 15px 35px rgba(0,0,0,.22);border-radius:11px;font-size:.76rem;font-weight:850;padding:13px 17px;transform:rotate(-7deg)}
+    .chip.one {left:-7%;bottom:23%}
+    .chip.two {right:-6%;top:27%;background:var(--pink);transform:rotate(9deg)}
+    .ring {position:absolute;right:1%;bottom:4%;height:90px;width:90px;border-radius:50%;border:21px solid var(--accent);opacity:.7}
+    .intro-strip {display:flex;align-items:center;justify-content:space-between;gap:20px;padding:25px 0;border-bottom:1px solid var(--line);font-size:.77rem;text-transform:uppercase;letter-spacing:.13em;font-weight:800;color:#b8cbc6}
+    .intro-strip span:nth-child(2) {color:var(--accent)}
+    section.section {padding:115px 0;scroll-margin-top:80px}
+    .section-top {display:flex;align-items:end;justify-content:space-between;gap:24px;margin-bottom:42px}
+    .section-kicker {color:var(--accent);font-size:.77rem;letter-spacing:.16em;font-weight:850;text-transform:uppercase;margin-bottom:11px}
+    h2 {font-size:clamp(2.3rem,5vw,4.1rem);line-height:1.13;letter-spacing:-.067em;margin:0}
+    .section-desc {color:var(--muted);max-width:420px;margin:0;font-size:.98rem}
+    .about-grid {display:grid;grid-template-columns:1.1fr .9fr;gap:24px}
+    .about-copy {border-radius:var(--radius);padding:43px;background:var(--bg2);border:1px solid var(--line)}
+    .about-copy p {font-size:1.06rem;color:#c6d6d1;max-width:640px}
+    .about-copy p:last-child {margin:0}
+    .about-details {display:grid;gap:15px}
+    .detail {padding:25px 27px;border-radius:var(--radius);background:var(--panel);border:1px solid var(--line)}
+    .detail-label {font-size:.7rem;font-weight:850;text-transform:uppercase;letter-spacing:.14em;color:var(--accent);margin-bottom:8px}
+    .detail-value {font-size:1.03rem;font-weight:700;line-height:1.4}
+    .skills-bg {background:#0b2024;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+    .skills-grid {display:grid;grid-template-columns:repeat(3,1fr);gap:17px}
+    .skill-card {border:1px solid var(--line);background:#11292e;border-radius:var(--radius);padding:32px 27px;min-height:260px}
+    .card-icon {font-size:2rem;margin-bottom:25px;display:block}
+    .skill-card h3 {font-size:1.21rem;letter-spacing:-.025em;margin-bottom:12px}
+    .skill-card p {color:var(--muted);font-size:.94rem;line-height:1.75;margin-bottom:0}
+    .pill-row {display:flex;flex-wrap:wrap;gap:9px;margin-top:27px}
+    .pill {border:1px solid rgba(201,247,122,.25);border-radius:50px;padding:7px 13px;font-size:.75rem;color:#c9dacb;background:rgba(201,247,122,.035)}
+    .project-grid {display:grid;grid-template-columns:1fr 1fr;gap:22px}
+    .project-card {border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;background:var(--bg2)}
+    .project-card.feature {grid-column:span 2;display:grid;grid-template-columns:1.05fr .95fr}
+    .project-art {min-height:255px;position:relative;overflow:hidden;display:grid;place-items:center;padding:35px;background:radial-gradient(circle at 30% 20%,#356354,#173d3f 55%,#123138)}
+    .project-card.feature .project-art {min-height:355px}
+    .project-art.expense {background:radial-gradient(circle at 50% 20%,#43495c,#29344b 65%,#1c313d)}
+    .project-art.creative {background:radial-gradient(circle at 40% 20%,#886151,#654c57 55%,#323943)}
+    .mock-window {width:90%;max-width:435px;border:1px solid rgba(255,255,255,.28);border-radius:14px;background:#e7eee5;box-shadow:0 20px 35px rgba(0,0,0,.22);overflow:hidden;transform:rotate(-4deg)}
+    .mock-head {height:33px;background:#eaf1e8;border-bottom:1px solid #cad9d1;display:flex;gap:5px;align-items:center;padding:0 12px}
+    .mock-head i {width:7px;height:7px;border-radius:50%;background:#adbdb0}
+    .mock-body {display:grid;grid-template-columns:27% 1fr;min-height:170px}
+    .mock-side {background:#173c3f;padding:18px 12px;display:flex;flex-direction:column;gap:11px}
+    .mock-side i {height:5px;background:#527776;border-radius:3px;width:80%}
+    .mock-side i:first-child {height:12px;background:var(--accent);width:60%;margin-bottom:10px}
+    .mock-main {padding:18px;display:grid;grid-template-columns:1fr 1fr 1fr;gap:9px;align-content:start}
+    .mock-main .bar {height:37px;background:#cadbd1;border-radius:7px}
+    .mock-main .bar:nth-child(2) {background:#d6e9ab}
+    .mock-main .bar:nth-child(3) {background:#b0d4c5}
+    .mock-main .wide {grid-column:span 3;height:46px;background:repeating-linear-gradient(to right,#c5d8ce 0px,#c5d8ce 34px,#dfebe4 34px,#dfebe4 55px);border-radius:7px}
+    .expense-visual {width:225px;padding:22px;background:#f2f0e9;border-radius:17px;box-shadow:22px 24px 0 rgba(255,255,255,.10);transform:rotate(7deg);color:#243b41}
+    .expense-visual b {font-size:.76rem}
+    .expense-visual strong {display:block;font-size:2.1rem;letter-spacing:-.06em;margin:9px 0 20px}
+    .expense-bars {height:90px;display:flex;align-items:end;gap:11px}
+    .expense-bars i {flex:1;border-radius:5px 5px 0 0;background:#86b0a5}
+    .expense-bars i:nth-child(1) {height:40%}.expense-bars i:nth-child(2) {height:75%;background:#c3e77c}.expense-bars i:nth-child(3) {height:55%}.expense-bars i:nth-child(4) {height:95%;background:#dcaf94}.expense-bars i:nth-child(5) {height:60%}
+    .creative-art {display:grid;grid-template-columns:1fr 1fr;gap:10px;transform:rotate(-9deg);width:200px}
+    .creative-art i {height:92px;border-radius:10px;background:#e5ab9f;box-shadow:0 10px 25px #0003}
+    .creative-art i:nth-child(2) {background:#dbd0b0;transform:translateY(22px)}
+    .creative-art i:nth-child(3) {background:#acc7a8}.creative-art i:nth-child(4) {background:#f1c27b;transform:translateY(22px)}
+    .project-info {padding:31px 32px 33px}
+    .project-card.feature .project-info {display:flex;flex-direction:column;justify-content:center;padding:45px}
+    .project-meta {font-size:.73rem;font-weight:850;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);margin-bottom:14px}
+    .project-info h3 {font-size:1.57rem;line-height:1.2;letter-spacing:-.04em;margin-bottom:14px}
+    .project-info p {color:var(--muted);font-size:.91rem;margin:0 0 21px}
+    .tag-row {display:flex;flex-wrap:wrap;gap:8px}
+    .tag-row span {background:rgba(255,255,255,.07);border:1px solid var(--line);border-radius:50px;color:#d2dcd2;font-size:.71rem;padding:5px 11px}
+    .project-note {font-size:.77rem;color:#99b4a8;margin-top:22px}
+    .contact-area {background:var(--accent);color:#11221d;padding:80px 0;position:relative;overflow:hidden}
+    .contact-area::after {content:"✳";position:absolute;right:-35px;bottom:-160px;font-size:400px;opacity:.14;line-height:1;pointer-events:none}
+    .contact-layout {position:relative;z-index:1;display:flex;align-items:center;justify-content:space-between;gap:55px}
+    .contact-area .section-kicker {color:#375d31}
+    .contact-area h2 {max-width:660px;font-size:clamp(2.5rem,5.2vw,5rem)}
+    .contact-area p {max-width:600px;margin:23px 0 0;font-size:1.04rem;color:#315042}
+    .contact-area .button {white-space:nowrap;background:#102c30;color:var(--white);border-color:#102c30}
+    .site-footer {padding:28px 0;color:#98ada7}
+    .footer-inner {display:flex;justify-content:space-between;align-items:center;gap:20px;font-size:.78rem}
+    .site-footer a:hover {color:var(--accent)}
+    @media(max-width:900px) {
+      .hero {gap:28px}
+      .chip.one {left:-2%}.chip.two {right:0}
+      .project-card.feature {grid-template-columns:1fr 1fr}
+      .intro-strip {flex-wrap:wrap}
+    }
+    @media(max-width:720px) {
+      .site-header {height:68px}
+      .menu-toggle {display:block}
+      .nav-links {display:none;position:absolute;top:67px;left:0;right:0;flex-direction:column;align-items:stretch;gap:0;background:#0c2227;padding:10px 21px 18px;border-bottom:1px solid var(--line)}
+      .nav-links.open {display:flex}
+      .nav-links a {display:block;padding:12px 6px}
+      .nav-cta {display:none}
+      .hero {grid-template-columns:1fr;padding:78px 0 80px;min-height:0;gap:38px}
+      h1 {font-size:clamp(3.15rem,11vw,5rem)}
+      .hero-summary {font-size:1rem}
+      .hero-foot {margin-top:38px}
+      .visual {height:350px;max-width:365px;margin:0 auto;aspect-ratio:auto}
+      .visual-board {inset:5% 15% 5%}
+      .big-initials {font-size:7rem}
+      .orbit-text {left:9%}.chip.one {left:3%;bottom:22%}.chip.two {right:3%;top:26%}
+      .ring {width:65px;height:65px;border-width:15px;right:8%;bottom:0}
+      .intro-strip {justify-content:center;gap:12px;font-size:.65rem;text-align:center}
+      .intro-strip span:last-child {display:none}
+      section.section {padding:75px 0}
+      .section-top {display:block;margin-bottom:28px}
+      .section-desc {margin-top:18px}
+      .about-grid,.skills-grid,.project-grid {grid-template-columns:1fr}
+      .project-card.feature {grid-column:auto;display:block}
+      .project-card.feature .project-info {padding:31px 32px 33px}
+      .project-card.feature .project-art {min-height:255px}
+      .about-copy {padding:28px}
+      .contact-area {padding:68px 0}
+      .contact-layout {display:block}
+      .contact-area .button {margin-top:28px}
+      .footer-inner {flex-direction:column;align-items:flex-start;gap:9px}
+    }
+    @media(max-width:380px) {.wrap {width:calc(100% - 32px)}.chip.one {left:0}.chip.two {right:0}.hero-actions .button {flex:1}}
+    @media(prefers-reduced-motion:reduce) {html {scroll-behavior:auto}.button {transition:none}.button:hover {transform:none}}
   </style>
 </head>
 <body>
-<header>
-  <nav class="nav container" aria-label="Main navigation">
-    <a class="logo" href="#home">Lovely<span>.</span>Portfolio</a>
-    <div class="links">
-      <a href="#about">About</a><a href="#skills">Skills</a><a href="#projects">Projects</a><a href="#contact">Contact</a>
-    </div>
-  </nav>
-</header>
-<main>
-  <section class="hero container" id="home">
-    <div>
-      <div class="eyebrow">IT Student • Creative Problem Solver</div>
-      <h1>Hello, I'm <span>Lovely Martinez.</span></h1>
-      <p>I enjoy turning ideas into useful digital experiences—from websites and systems to presentations and creative design work. Welcome to my growing portfolio.</p>
-      <div class="buttons"><a class="btn primary" href="#projects">Explore my work ↗</a><a class="btn secondary" href="#contact">Contact me</a></div>
-    </div>
-    <div class="profile" aria-label="Lovely Martinez initials placeholder; profile picture can be added later"><div class="monogram">LM</div><small>Building & Learning</small></div>
-  </section>
-  <section class="about" id="about">
-    <div class="container">
-      <span class="kicker">A little about me</span><h2>Curiosity meets creativity.</h2>
-      <div class="about-grid">
-        <div><p class="lead">I'm a college student exploring web development, technology, and digital creativity. I enjoy learning practical tools, collaborating on projects, and building solutions that make tasks easier.</p><p class="lead">This portfolio is a place to share selected projects, develop my skills, and document my growth.</p></div>
-        <div class="card facts"><div class="fact"><strong>Focus</strong><span>Websites, systems & digital projects</span></div><div class="fact"><strong>Tools</strong><span>HTML, CSS, JavaScript, Canva & more</span></div><div class="fact"><strong>Currently</strong><span>Learning, designing, and building</span></div></div>
+  <header class="site-header">
+    <nav class="wrap nav" aria-label="Main navigation">
+      <a class="brand" href="#home" aria-label="Lovely Martinez, back to top">lovely<span>.</span>folio</a>
+      <button class="menu-toggle" type="button" id="menuToggle" aria-expanded="false" aria-label="Open menu" aria-controls="navLinks">☰</button>
+      <div class="nav-links" id="navLinks">
+        <a href="#about">About</a>
+        <a href="#skills">Skills</a>
+        <a href="#projects">Projects</a>
+        <a href="#contact">Contact</a>
+      </div>
+      <a class="nav-cta" href="https://github.com/lovelyMartinez08" target="_blank" rel="noopener noreferrer">My GitHub ↗</a>
+    </nav>
+  </header>
+
+  <main>
+    <div class="hero-shell" id="home">
+      <div class="wrap hero">
+        <div>
+          <span class="eyebrow">IT student · Creator · Problem solver</span>
+          <h1>Ideas into <em>digital</em> experiences.</h1>
+          <p class="hero-summary">Hi, I'm <strong>Lovely Martinez</strong> — a third-year college student exploring web development, creative design, and practical solutions through technology. This is where I share what I'm building and learning.</p>
+          <div class="hero-actions">
+            <a class="button primary" href="#projects">Explore my projects <span aria-hidden="true">↗</span></a>
+            <a class="button ghost" href="#about">Get to know me <span aria-hidden="true">→</span></a>
+          </div>
+          <div class="hero-foot"><span class="line" aria-hidden="true"></span> Currently learning, creating & growing</div>
+        </div>
+        <div class="visual" role="img" aria-label="Decorative illustrated monogram with the initials LM">
+          <div class="orbit-text"><span></span> DIGITAL CREATOR</div>
+          <div class="visual-board"><div class="big-initials">LM</div><p>PORTFOLIO / 2026</p></div>
+          <div class="chip one">&lt; code /&gt;</div>
+          <div class="chip two">✦ creative mind</div>
+          <div class="ring" aria-hidden="true"></div>
+        </div>
       </div>
     </div>
-  </section>
-  <section class="container" id="skills">
-    <span class="kicker">What I work with</span><h2>Skills & interests</h2><p class="lead">A mix of technical and creative tools I'm developing through coursework and projects.</p>
-    <div class="skills">
-      <div class="card"><h3>💻 Web Development</h3><p>HTML, CSS, JavaScript, basic backend development, and website management.</p></div>
-      <div class="card"><h3>🎨 Creative Design</h3><p>Graphics, presentations, digital layouts, and video editing.</p></div>
-      <div class="card"><h3>📁 Digital Productivity</h3><p>Document preparation, spreadsheets, research, organization, and online tools.</p></div>
+
+    <div class="wrap intro-strip" aria-label="Portfolio focus areas">
+      <span>Web development</span><span>✳</span><span>Creative design</span><span>✳</span><span>Digital productivity</span>
     </div>
-  </section>
-  <section class="container" id="projects">
-    <span class="kicker">Selected work</span><h2>Projects I'm building</h2><p class="lead">These examples can be expanded with screenshots, features, and live demos as each project develops.</p>
-    <div class="projects">
-      <article class="card project"><div><span class="tag">Web Application</span><h3>NCAP — NEMSU Cantilan Attendance Portal</h3><p>A school attendance portal project designed to support attendance tracking and related workflows.</p></div><span class="badge">Project showcase</span></article>
-      <article class="card project"><div><span class="tag">Personal Software Project</span><h3>MyExpenseTracker</h3><p>An expense-tracking project. Add a description, screenshots, and a repository link when ready to share.</p></div><span class="badge">Project showcase</span></article>
-      <article class="card project"><div><span class="tag">Creative Portfolio</span><h3>Graphics & presentations</h3><p>A space for selected Canva designs, presentations, layouts, and video editing samples.</p></div><span class="badge">Coming soon</span></article>
-      <article class="card project"><div><span class="tag">Next Project</span><h3>Your next big idea</h3><p>Add future websites, applications, or case studies here as you develop them.</p></div><span class="badge">Coming soon</span></article>
+
+    <section class="section wrap" id="about">
+      <div class="section-top">
+        <div><p class="section-kicker">01 / About me</p><h2>A curious mind.<br>A creative approach.</h2></div>
+        <p class="section-desc">Technology gives me tools to solve problems; creativity helps me turn those solutions into experiences people can enjoy.</p>
+      </div>
+      <div class="about-grid">
+        <div class="about-copy">
+          <p>I'm Lovely, a third-year college student with a growing interest in building websites, developing useful systems, and designing clear, thoughtful digital content.</p>
+          <p>My work brings together technical projects and creative skills — from experimenting with web applications to preparing presentations, layouts, and videos. I value learning by doing and improving with every project.</p>
+          <p>This portfolio is a living collection of that journey.</p>
+        </div>
+        <div class="about-details">
+          <div class="detail"><div class="detail-label">Current chapter</div><div class="detail-value">Third-year college student</div></div>
+          <div class="detail"><div class="detail-label">Areas of interest</div><div class="detail-value">Web applications · Design · Digital tools</div></div>
+          <div class="detail"><div class="detail-label">Portfolio goal</div><div class="detail-value">Show meaningful work and keep learning</div></div>
+        </div>
+      </div>
+    </section>
+
+    <div class="skills-bg">
+      <section class="section wrap" id="skills">
+        <div class="section-top">
+          <div><p class="section-kicker">02 / What I do</p><h2>Skills with<br>room to grow.</h2></div>
+          <p class="section-desc">A mix of technology, visual creativity, and organizational tools that I use and continue to develop.</p>
+        </div>
+        <div class="skills-grid">
+          <article class="skill-card"><span class="card-icon" aria-hidden="true">⌘</span><h3>Web &amp; Development</h3><p>Creating and experimenting with websites and web-based systems, from interfaces to basic backend work.</p></article>
+          <article class="skill-card"><span class="card-icon" aria-hidden="true">✳</span><h3>Design &amp; Content</h3><p>Building visual presentations, graphic layouts, videos, and other digital materials with clear communication in mind.</p></article>
+          <article class="skill-card"><span class="card-icon" aria-hidden="true">▦</span><h3>Digital Productivity</h3><p>Working with documents, spreadsheets, online tools, and structured workflows to keep projects organized.</p></article>
+        </div>
+        <div class="pill-row" aria-label="Tools and technologies"><span class="pill">HTML &amp; CSS</span><span class="pill">JavaScript</span><span class="pill">Python / Flask</span><span class="pill">Canva</span><span class="pill">Microsoft Office</span><span class="pill">Google Workspace</span><span class="pill">WordPress</span></div>
+      </section>
     </div>
-  </section>
-  <section class="container" id="contact">
-    <div class="contact-panel"><div><span class="kicker">Let's connect</span><h2>Thanks for visiting!</h2><p>Interested in my work? Explore my GitHub profile. You can also add a professional email address and downloadable résumé here later.</p></div><a class="btn primary" href="https://github.com/lovelyMartinez08" target="_blank" rel="noopener noreferrer">My GitHub ↗</a></div>
-  </section>
-</main>
-<footer class="container foot"><span>© <span id="year">2026</span> Lovely Martinez. Built with HTML & CSS.</span><span>Hosted on GitHub Pages • <a class="inline-link" href="#home">Back to top ↑</a></span></footer>
-<script>document.getElementById('year').textContent = new Date().getFullYear();</script>
+
+    <section class="section wrap" id="projects">
+      <div class="section-top">
+        <div><p class="section-kicker">03 / Selected work</p><h2>Things I've<br>been building.</h2></div>
+        <p class="section-desc">A look at projects and creative work. More details, screenshots, and demos will be added as the portfolio grows.</p>
+      </div>
+      <div class="project-grid">
+        <article class="project-card feature">
+          <div class="project-art" aria-hidden="true"><div class="mock-window"><div class="mock-head"><i></i><i></i><i></i></div><div class="mock-body"><div class="mock-side"><i></i><i></i><i></i><i></i></div><div class="mock-main"><div class="bar"></div><div class="bar"></div><div class="bar"></div><div class="wide"></div><div class="wide"></div></div></div></div></div>
+          <div class="project-info"><div class="project-meta">01 / School system project</div><h3>NCAP — NEMSU Cantilan Attendance Portal</h3><p>An attendance-portal project focused on organizing student attendance workflows. Detailed features and project screenshots will be added here.</p><div class="tag-row"><span>Web application</span><span>School project</span></div><div class="project-note">Illustrative mockup · Not an actual app screenshot</div></div>
+        </article>
+        <article class="project-card">
+          <div class="project-art expense" aria-hidden="true"><div class="expense-visual"><b>EXPENSE OVERVIEW</b><strong>₱ 0.00</strong><div class="expense-bars"><i></i><i></i><i></i><i></i><i></i></div></div></div>
+          <div class="project-info"><div class="project-meta">02 / Personal project</div><h3>MyExpenseTracker</h3><p>An expense-tracking project exploring practical ways to organize and view financial records.</p><div class="tag-row"><span>Project showcase</span><span>Personal work</span></div><div class="project-note">Illustrative mockup · Project demo not linked yet</div></div>
+        </article>
+        <article class="project-card">
+          <div class="project-art creative" aria-hidden="true"><div class="creative-art"><i></i><i></i><i></i><i></i></div></div>
+          <div class="project-info"><div class="project-meta">03 / Creative projects</div><h3>Designs &amp; Digital Content</h3><p>Presentations, layouts, and edited videos that bring ideas and stories to life.</p><div class="tag-row"><span>Design</span><span>Presentations</span><span>Video editing</span></div><div class="project-note">Project samples coming soon</div></div>
+        </article>
+      </div>
+    </section>
+
+    <section class="contact-area" id="contact">
+      <div class="wrap contact-layout">
+        <div><p class="section-kicker">04 / Let's connect</p><h2>Let's make something meaningful.</h2><p>Interested in my work or want to connect? You can find my projects and reach out through my GitHub profile. A direct contact email can be added when I'm ready to share it.</p></div>
+        <a class="button" href="https://github.com/lovelyMartinez08" target="_blank" rel="noopener noreferrer">Visit my GitHub ↗</a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer"><div class="wrap footer-inner"><span>© <span id="year">2026</span> Lovely Martinez. Built with curiosity.</span><a href="#home">Back to top ↑</a></div></footer>
+  <script>
+    const toggle = document.getElementById('menuToggle');
+    const links = document.getElementById('navLinks');
+    toggle.addEventListener('click', () => {
+      const open = links.classList.toggle('open');
+      toggle.setAttribute('aria-expanded', String(open));
+      toggle.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+      toggle.textContent = open ? '✕' : '☰';
+    });
+    links.querySelectorAll('a').forEach(link => link.addEventListener('click', () => {
+      links.classList.remove('open');
+      toggle.setAttribute('aria-expanded', 'false');
+      toggle.setAttribute('aria-label', 'Open menu');
+      toggle.textContent = '☰';
+    }));
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
 </body>
 </html>
