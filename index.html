@@ -203,7 +203,26 @@
     }
     @media(max-width:380px) {.wrap {width:calc(100% - 32px)}.chip.one {left:0}.chip.two {right:0}.hero-actions .button {flex:1}}
     @media(prefers-reduced-motion:reduce) {html {scroll-behavior:auto}.button {transition:none}.button:hover {transform:none}}
-  </style>
+  
+    /* Live projects use the exact same design language as the original cards. */
+    [hidden] {display:none !important}
+    .managed-project-grid {margin-bottom:22px}
+    .managed-card {display:flex;flex-direction:column}
+    .managed-card .project-info {padding:25px}
+    .managed-art {height:250px;overflow:hidden;background:radial-gradient(circle at 35% 30%,#23564e,#0c2b2f)}
+    .managed-picture {cursor:zoom-in;display:block;border:0;padding:0;background:none;overflow:hidden;color:inherit}
+    .managed-cover {width:100%;height:100%}
+    .managed-cover img {width:100%;height:100%;object-fit:cover;display:block}
+    .managed-no-cover {width:100%;height:100%;display:grid;place-items:center;font-size:1.05rem;letter-spacing:.2em;color:var(--accent);font-weight:800}
+    .managed-gallery {display:flex;flex-wrap:wrap;gap:9px;margin-top:17px}
+    .managed-gallery .managed-picture {width:80px;height:65px;border:1px solid var(--line);border-radius:12px}
+    .managed-gallery img {width:100%;height:100%;object-fit:cover}
+    .managed-links {display:flex;gap:9px;flex-wrap:wrap;margin-top:18px}
+    .managed-link {font-size:.82rem;font-weight:800;color:#08171c;background:var(--accent);padding:9px 14px;border-radius:11px}
+    .managed-link:hover {filter:brightness(1.08)}
+    .project-load-note {color:var(--muted);font-size:.8rem}
+    @media(max-width:720px){.managed-art {height:200px}}
+</style>
 </head>
 <body>
   <header class="site-header">
@@ -293,8 +312,10 @@
         <div><p class="section-kicker">03 / Selected work</p><h2>Things I've<br>been building.</h2></div>
         <p class="section-desc">A look at projects and creative work. Actual interface screenshots are featured below. More project details and links will be added as they become available.</p>
       </div>
-      <div class="project-grid">
-        <article class="project-card feature" aria-labelledby="ncap-title">
+      <div id="managedProjects" class="project-grid managed-project-grid" hidden></div>
+      <p class="project-load-note" id="projectLoadNotice" role="status"></p>
+      <div class="project-grid" id="starterProjects">
+        <article data-static-slot="ncap" class="project-card feature" aria-labelledby="ncap-title">
           <div class="project-art ncap-art">
             <div class="ncap-gallery" aria-label="Actual NCAP interface screenshots">
               <button class="ncap-shot welcome-shot" type="button" data-ncap-shot="Welcome screen" aria-label="Enlarge the actual NCAP welcome screen screenshot">
@@ -315,11 +336,11 @@
             <div class="project-note ncap-caption">Actual project screenshots · Tap an image to enlarge · Live demo and source link not added yet</div>
           </div>
         </article>
-        <article class="project-card">
+        <article data-static-slot="expense" class="project-card">
           <div class="project-art expense" aria-hidden="true"><div class="expense-visual"><b>EXPENSE OVERVIEW</b><strong>₱ 0.00</strong><div class="expense-bars"><i></i><i></i><i></i><i></i><i></i></div></div></div>
           <div class="project-info"><div class="project-meta">02 / Personal project</div><h3>MyExpenseTracker</h3><p>An expense-tracking project exploring practical ways to organize and view financial records.</p><div class="tag-row"><span>Project showcase</span><span>Personal work</span></div><div class="project-note">Illustrative mockup · Project demo not linked yet</div></div>
         </article>
-        <article class="project-card">
+        <article data-static-slot="creative" class="project-card">
           <div class="project-art creative" aria-hidden="true"><div class="creative-art"><i></i><i></i><i></i><i></i></div></div>
           <div class="project-info"><div class="project-meta">03 / Creative projects</div><h3>Designs &amp; Digital Content</h3><p>Presentations, layouts, and edited videos that bring ideas and stories to life.</p><div class="tag-row"><span>Design</span><span>Presentations</span><span>Video editing</span></div><div class="project-note">Project samples coming soon</div></div>
         </article>
@@ -370,6 +391,131 @@
     });
     document.getElementById('closeNcapDialog').addEventListener('click', () => ncapDialog.close());
     ncapDialog.addEventListener('click', (event) => { if (event.target === ncapDialog) ncapDialog.close(); });
+  </script>
+  <script>
+/* Public browser configuration. Replace both placeholders after creating Supabase.
+   The publishable key is designed for browser use; RLS enforces permissions.
+   NEVER put a service_role key, secret key, admin password or DB password here. */
+window.PORTFOLIO_SUPABASE = Object.freeze({
+  url: 'https://ekxepbaoluswokusdcai.supabase.co',
+  publishableKey: 'PASTE_YOUR_SB_PUBLISHABLE_KEY_HERE'
+});
+
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script>
+/* LOVELY.FOLIO — public-only project renderer. No login or privileged keys. */
+(() => {
+  const config = window.PORTFOLIO_SUPABASE;
+  const target = document.getElementById('managedProjects');
+  const original = document.getElementById('starterProjects');
+  const notice = document.getElementById('projectLoadNotice');
+  if (!target || !original || !config) return;
+  const configured = /^https:\/\/[a-z0-9-]+\.supabase\.co$/i.test(config.url || '')
+    && !!config.publishableKey && !config.publishableKey.startsWith('YOUR_');
+  if (!configured) return; // Preserve your original project cards until setup completes.
+  if (!window.supabase?.createClient) { console.warn('Supabase library unavailable.'); return; }
+  const client = window.supabase.createClient(config.url, config.publishableKey, {
+    auth: { persistSession: false, autoRefreshToken: false, detectSessionInUrl: false }
+  });
+
+  function publicAsset(path) {
+    if (!path || typeof path !== 'string') return '';
+    return client.storage.from('portfolio-assets').getPublicUrl(path).data.publicUrl;
+  }
+  function validLink(url) {
+    if (!url) return null;
+    try { const u = new URL(url); return ['https:', 'http:'].includes(u.protocol) ? u.href : null; }
+    catch { return null; }
+  }
+  function make(tag, className, text) {
+    const el = document.createElement(tag);
+    if (className) el.className = className;
+    if (text !== undefined && text !== null) el.textContent = String(text);
+    return el;
+  }
+  function linkButton(label, href) {
+    const safe = validLink(href);
+    if (!safe) return null;
+    const a = make('a', 'managed-link', label + ' ↗');
+    a.href = safe; a.target = '_blank'; a.rel = 'noopener noreferrer';
+    return a;
+  }
+  function showImage(src, label) {
+    const dialog = document.getElementById('ncapDialog');
+    const img = document.getElementById('ncapDialogImage');
+    if (!dialog || !img) return;
+    img.src = src;
+    img.alt = label;
+    document.getElementById('ncapDialogTitle').textContent = label;
+    if (typeof dialog.showModal === 'function') dialog.showModal();
+  }
+  function picture(src, alt, isCover=false) {
+    const btn = make('button', 'managed-picture' + (isCover ? ' managed-cover' : ''));
+    btn.type = 'button'; btn.setAttribute('aria-label', 'Enlarge image: ' + alt);
+    const img = make('img'); img.src = src; img.alt = alt; img.loading = 'lazy';
+    btn.append(img);
+    btn.addEventListener('click', () => showImage(src, alt));
+    return btn;
+  }
+  function renderCard(project) {
+    const article = make('article', 'project-card managed-card');
+    const artwork = make('div', 'managed-art');
+    const cover = publicAsset(project.cover_path);
+    if (cover) artwork.append(picture(cover, project.title + ' cover image', true));
+    else artwork.append(make('div', 'managed-no-cover', 'PROJECT SHOWCASE'));
+    const info = make('div', 'project-info');
+    info.append(make('div', 'project-meta', project.category || 'Project'));
+    info.append(make('h3', '', project.title));
+    info.append(make('p', '', project.summary || 'Project details will be added soon.'));
+    if (Array.isArray(project.tags) && project.tags.length) {
+      const tagRow = make('div', 'tag-row');
+      project.tags.slice(0, 8).forEach(tag => tagRow.append(make('span', '', tag)));
+      info.append(tagRow);
+    }
+    const gallery = Array.isArray(project.gallery_paths) ? project.gallery_paths : [];
+    if (gallery.length) {
+      const imgs = make('div', 'managed-gallery');
+      gallery.slice(0, 8).forEach((path, i) => {
+        const src = publicAsset(path);
+        if (src) imgs.append(picture(src, project.title + ' screenshot ' + (i+1)));
+      });
+      info.append(imgs);
+    }
+    const buttons = make('div', 'managed-links');
+    for (const a of [
+      linkButton('Live Demo', project.demo_url),
+      linkButton('Source Code', project.repo_url),
+      linkButton('Download Sample', publicAsset(project.sample_path))
+    ]) if (a) buttons.append(a);
+    if (buttons.childElementCount) info.append(buttons);
+    article.append(artwork, info);
+    return article;
+  }
+  async function loadProjects() {
+    try {
+      const { data, error } = await client.from('portfolio_projects')
+        .select('id,title,summary,category,tags,cover_path,gallery_paths,sample_path,demo_url,repo_url,featured_slot')
+        .eq('status', 'published').order('sort_order', { ascending: true })
+        .order('created_at', { ascending: false });
+      if (error) throw error;
+      if (!data?.length) return;
+      target.replaceChildren(...data.map(renderCard));
+      target.hidden = false;
+      // Preserve the original featured cards until YOU replace each one in admin.
+      const replacements = new Set(data.map(p => p.featured_slot).filter(Boolean));
+      original.querySelectorAll('[data-static-slot]').forEach(card => {
+        card.hidden = replacements.has(card.dataset.staticSlot);
+      });
+      if ([...original.children].every(child => child.hidden)) original.hidden = true;
+    } catch (error) {
+      console.warn('Could not load managed projects:', error.message);
+      if (notice) notice.textContent = 'New projects are temporarily unavailable; the original showcase remains visible.';
+    }
+  }
+  loadProjects();
+})();
+
   </script>
 </body>
 </html>
